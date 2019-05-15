@@ -1,0 +1,47 @@
+//Aryan Zamanzadeh
+
+void setup() {
+  size(900, 500);
+  noStroke();
+  frameRate(300);
+}
+
+void draw() {
+
+    
+if(mousePressed){ 
+
+  float r = map(mouseX, 0, width, 0, 200);
+  float g = map(mouseY, 0, height, 0, 255);
+  float b = map(mouseY, 0, height, 0, 120);
+  float diameter = map(mouseX, 0, width, 20, 100);
+  
+  fill(r, g, b);
+  noStroke();
+  ellipse(mouseX, mouseY, diameter, diameter); 
+  } 
+  
+  else {
+    
+  background(0);
+ 
+  float r = map(mouseX, 0, width, 0, 200);
+  float g = map(mouseY, 0, height, 0, 255);
+  float b = map(mouseY, 0, height, 0, 120);
+  float diameter = map(mouseX, 0, width, 20, 100);
+  
+  fill(r, g, b);
+  noStroke();
+  ellipse(mouseX, mouseY, diameter, diameter); 
+   
+  }
+
+}
+
+void mousePressed() {
+  loop(); 
+}
+
+void mouseReleased() {
+  noLoop();  
+} 

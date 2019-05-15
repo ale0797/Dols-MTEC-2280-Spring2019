@@ -1,0 +1,145 @@
+//Maurice Burt 
+
+Ball Ball1; // Declare car object as a globle variable.
+
+Ball Ball3;
+
+void setup() {
+  size(480, 270);
+  // Initialize Objects
+  Ball1 = new Ball(100, 20, 50, 100);
+  Ball3 = new Ball(100, 20, 50, 100);
+}
+
+void draw() {
+  background(255);
+  Ball1.move(); 
+  Ball1.display();
+    Ball3.move1(); 
+  Ball3.display();
+  
+}
+
+// Define a class outside of setup and draw.
+class Ball { 
+  // Variables.
+  color r;
+  color g;
+  color b;
+  float xpos;
+  float ypos;
+  float speed;
+
+  // Constructor.
+  Ball(int IndyColor, float IndyXpos, float IndyYpos, float IndySpeed) { 
+   //int IndyColor1;
+   //int IndyColor2;
+    r = IndyColor;
+    g = IndyColor;
+    b = IndyColor;
+    xpos = IndyXpos;
+    ypos = IndyYpos;
+    speed = IndySpeed;
+  }
+
+  // Function
+  void display() { 
+    stroke(0);
+    fill(r, g, b);
+    ellipse(xpos, ypos, 30, 30);
+  }
+
+  // Function (Update)
+  void move() { 
+    speed = 1;
+    xpos = xpos + speed;
+    if (xpos > width) {
+      xpos = 0;  
+    }
+    if (xpos >20){
+    ypos = 40;
+    r = 50;
+    g = 180;
+    b = 100;
+    }
+    if (xpos > 75){
+      ypos =90;
+      r = 30;
+      g = 40; 
+      b = 150;
+    }
+    if (xpos > 125){
+      ypos = 150;
+      r = 50;
+      g = 100;
+      b = 20;
+    }
+    if(xpos > 200){
+    ypos = 95;
+    r = 200;
+    g = 50;
+    b = 100;
+    }
+    if(xpos > 250){
+    ypos = 160;
+    r = 160;
+    g = 190;
+    b = 80;
+    }
+    if(xpos > 320){
+    ypos  = 200;
+    r = 20;
+    g = 100;
+    b = 50;
+    }
+    if (xpos > 350){
+    ypos = 60;
+    r = 20;
+    g = 90;
+    b = 150;
+    }
+    if (xpos > 380){
+    ypos = 269;
+    r = 190;
+    g = 50;
+    b = 90;
+    }
+      ypos = ypos + speed;
+    if (ypos > height){
+      ypos = 20;
+    }
+  }
+  
+  void move1(){
+    speed = 1;
+         xpos = xpos + speed;  
+    if (xpos > width) {
+      xpos = 0;  
+    }
+    if (xpos> 18){
+    ypos = 40;
+    }
+    if (xpos > 100){
+      ypos =90;
+  }
+    if (xpos > 133){
+    ypos  = 150;
+    }
+    if (xpos>210){
+    ypos = 95;
+    }
+    if (xpos > 260){
+    ypos = 160;
+    }
+    if (xpos > 330){
+    ypos = 200;
+    }
+    if (xpos > 360){
+    ypos = 60;
+    }
+    if (xpos > 390){
+    
+    ypos = 269;
+  }
+  }
+}

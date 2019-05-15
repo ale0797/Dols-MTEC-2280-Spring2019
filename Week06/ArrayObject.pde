@@ -4,7 +4,7 @@ Ball[] balls = new Ball[100];
 
 void setup() {
   size(480, 270);
-  // Initialize each Car using a for loop.
+  // Initialize each ball using a for loop.
   for (int i = 0; i < balls.length; i ++ ) { 
     balls[i] = new Ball(color(i*2), width/2, i*3, i/20.0);
   }
@@ -12,7 +12,7 @@ void setup() {
 
 void draw() {
   background(255);
-  // Run each Car using a for loop.  
+  // Run each ball using a for loop.  
   for (int i = 0; i < balls.length; i++) { 
     //balls[i].move();
     balls[i].display();

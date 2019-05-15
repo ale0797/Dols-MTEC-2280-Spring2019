@@ -1,0 +1,6 @@
+Rules.
+
+The rules is simple.
+This is a 2-Player game.
+Player one control their paddle with the "W" and "S" keys while Player 2 control their paddle with the "UP_ARROW" and "DOWN_ARROW" keys.
+Hit the ball with the paddles. The player that reaches to 10 wins.!

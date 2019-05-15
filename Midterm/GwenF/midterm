@@ -1,0 +1,197 @@
+//color startC, color endC, int lbound, int rbound
+gradient skin = new gradient(#d11b8b, #d88e2d, 0, 500);
+eye left = new eye(150, 250, 270);
+eye right = new eye(650, 250, 270);
+int bx = int(random(135,665));
+int by = int(random(135,665));
+Mouth maw = new Mouth(230,440,4,200,350);
+boolean isNervous = false;
+boolean revealed = false;
+PImage fang;
+
+void setup()
+{
+  size(800, 800); //small canvas???
+  ellipseMode(CENTER);
+  fang = loadImage("tooth.png");
+}
+
+void draw()
+{
+  button();
+  background(#e29986);
+  
+  //skin.makeGradient();
+  
+  if (revealed == false)
+  {
+    left.placeEye();
+    right.placeEye();
+  
+    left.pupil();
+    right.pupil();
+    //checkpoint
+    left.follow();
+    right.follow();
+  }
+  else if(revealed == true)
+  {
+    left.scared();
+    right.scared();
+    image(fang,maw.xPos,maw.yPos);
+  }
+  
+  maw.makeMaw();
+}
+
+void button()
+{
+  float distance = dist(mouseX,mouseY,bx,by);
+  
+  if(distance <= 200)
+  {
+    isNervous = true;
+  }
+  else{isNervous = false;}
+  
+  ellipse(bx,by,100,100);
+  
+  if(mousePressed == true && distance<=50)
+  {
+    revealed = true;
+    
+  }
+}
+
+void nervous(eye eyeball)
+  {
+    //if cursor is close to button, make pupil quiver
+    float x = mouseX;
+    float y = mouseY;
+    float shakeX = map(x,0,width,0,6);
+    float shakeY = map(y,0,width,0,6);
+    eyeball.px += shakeX*0.5;
+    eyeball.py += shakeY*0.5;
+  }
+  
+  class eye
+{
+  float xPos, yPos; 
+  float px, py;
+  float size;
+  float pSize;
+
+  eye(float x, float y, float s)
+  {
+    xPos = x;
+    yPos = y;
+    px = x;
+    py = y;
+    size = s;
+    pSize = size/3;
+  }
+  void pupil()
+  {
+    noStroke();
+    fill(#404040);
+    ellipse(px,py, pSize,pSize);
+  }
+
+  void placeEye()
+  {
+    noStroke();
+    fill(#fff9f2);
+    ellipse(xPos, yPos, size, size);
+  }
+  
+  void follow()
+  {
+    //make pupils follow cursor
+    //distance between pupil and eye.xpos can't be more than eye.size/2
+    float easing = 0.5;
+    float targetX = mouseX;
+    float dx = targetX - px;
+    px += dx * easing;
+  
+    float targetY = mouseY;
+    float dy = targetY - py;
+    py += dy * easing;
+    //code from https://processing.org/examples/easing.html
+    //if pupils y position is less than size-size/2
+    float topOfEye = yPos-size/2;
+    float bottomOfEye = yPos+size/2;
+    float leftOfEye = xPos-size/2;
+    float rightOfEye = xPos+size/2;
+    float edgeOfPupil = pSize/2;
+    //for pupil's y position
+    if(py < topOfEye)
+    {
+      py = topOfEye+edgeOfPupil;
+    }
+    else if(py > bottomOfEye)
+    {
+      py = bottomOfEye-edgeOfPupil;
+    }
+    //for pupil's xposition
+    if(px < leftOfEye)
+    {
+      px = leftOfEye+edgeOfPupil;
+    }
+    else if(px > rightOfEye)
+    {
+      px = rightOfEye-edgeOfPupil;
+    }
+  }
+  
+  
+  void scared()
+  {
+    int shift = int(random(-5,5));
+    for(int i = 0; i < 5; i++)
+    {
+      strokeWeight(2);
+      stroke(#404040);
+      fill(#fff9f2);
+      ellipse(xPos+shift,yPos+shift,size,size);
+    }
+  }
+}
+
+class Mouth
+{
+  int xPos = width/2;
+  int yPos = height/2;
+  int teeth;
+  int mawHeight;
+  int mawWidth;
+  
+  //constructor
+  Mouth(int x, int y, int numTeeth, int mHeight, int mWidth)
+  {
+    xPos = x;
+    yPos = y;
+    teeth = numTeeth;
+    mawHeight = mHeight;
+    mawWidth = mWidth;
+  }
+  
+  void makeMaw()
+  {
+    float base = mawWidth/teeth;
+    int newHeight = yPos+mawHeight;
+    
+    fill(#ff8ce2);
+    noStroke();
+    rect(xPos,yPos, mawWidth,200);
+    
+    //points goes right to left
+    for(int i = 0;i < teeth; i++)
+    {
+      fill(#fefff9);
+      triangle(xPos,yPos,  (xPos+base/2),yPos+75,  (xPos+base),yPos);
+      triangle(xPos,newHeight,  (xPos+base/2),newHeight-75,  (xPos+base),newHeight);
+      translate(base,0);
+    }
+  }
+
+}

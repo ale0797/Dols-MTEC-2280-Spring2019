@@ -1,0 +1,493 @@
+// Maurice Burt 
+
+String Name1;
+String Name2;
+String Name3;
+String Name4;
+
+String inventoryName;
+
+float x;
+float speed;
+float r;
+float g;
+float b;
+float px = 148;
+float ix = 210;
+float ex = 275;
+float py = 575;
+float iy = 575;
+float ey = 575;
+float inventory = 400;
+float inventoryX = 410;
+float inventoryY = 227;
+float blockerX = 410;
+float blockerY = 201;
+//first character
+float characterR = 23;
+float characterG = 40;
+float characterB = 150;
+//second character 
+float characterR1 = 150;
+float characterG1 = 30;
+float characterB1 = 60;
+//third character
+float characterR2 = 20;
+float characterG2 = 90;
+float characterB2 = 180;
+//fourth character
+float characterR3 = 60;
+float characterG3 = 130;
+float characterB3 = 90;
+float enemyX = 400;
+float enemySpeed = 1;
+
+boolean morning = false;
+boolean afternoon = false;
+boolean night = false;
+boolean n1 = false;
+boolean n2 = false;
+boolean n3 = false;
+boolean n4 = false;
+boolean x1 = false;
+boolean x2 = false;
+boolean startButton = false;
+boolean p1 = false;
+boolean i1 = false;
+boolean e1 = false;
+boolean gameover = false;
+
+PFont f;
+PImage img;
+
+
+void setup() {
+  /////////////take out the "img" portion of stuff to make code work
+  size (800, 800);                            
+  background(255);
+
+  img = loadImage("img.png");
+}
+
+void draw() {
+  /////start button////////////
+  
+  if(startButton == false){
+  println("ClickStart");
+  fill(0);
+  textSize(50);
+  text("Click ''S'' to Start", 200,250);
+}
+  if (keyPressed) {
+    if (key == 's' ||key == 'S') {
+      startButton = true;
+      if(startButton == true){
+
+      firstQuestion();
+    }
+  }
+  
+    ///sky////
+    //r = 0;
+    //g = 0;
+    //b = 255;
+    fill(r, g, b);
+    rect(0, 0, 1000, 1000);
+
+    ///platform////
+    fill(30);
+    rect(0, 500, 800, 500);
+
+    /////////obstacles////////////////////
+    fill(90, 180, 50);
+    rect(200, 470, 50, 70);  ///first question
+    rect(400, 470, 50, 70);  //second question 
+    rect(600, 470, 50, 70); //third question
+    //////////morning/////////
+
+    if (keyPressed) {
+      if (key == 'm' || key == 'M') {
+        morning = true;
+        afternoon = false;
+        night = false;
+      }
+      if (morning == true) {
+        fill(255, 250, 42);
+        noStroke();
+        ellipse(700, 100, 200, 200);    
+      }
+    } else {
+      noFill();
+    }      
+    /////////////afternoon///////////////   
+    if (keyPressed) {
+      if (key == 'a' || key == 'A') {
+        afternoon = true;
+        morning = false;
+        night = false;
+      }
+      if (afternoon == true) {
+        fill(255, 210, 42);
+        noStroke();
+        ellipse (300, 100, 200, 200);
+      }
+    }
+    ///////////night////////////
+
+    if (keyPressed) {
+      if (key == 'n' || key == 'N') {
+        night = true;
+        morning = false;
+        afternoon = false;
+      }
+      if (night == true) {
+        fill(211, 234, 235);
+        noStroke();
+        ellipse(700, 100, 200, 200);
+      }
+    }
+
+
+    if (keyPressed) {
+      if (key == 'm' || key == 'M' || key == 'a' || key == 'A' || key == 'n' || key == 'N') {
+
+        secondQuestion();
+      }
+    }
+//////////name choices//////////////////////////
+      if (keyPressed) {
+        if (key == '1') {
+          n1 = true;
+          n2 = false;
+          n3 = false;
+          n4 = false;
+        }
+
+        if (n1 == true) {
+          println("Hello " + Name1);
+          println("Use the LEFT and RIGHT arrow keys to move");
+          fill(0);
+          textSize(50);
+          text(Name1, 0, 100);
+          fill(characterR, characterG, characterB);
+          rect(x, 500, 50, 50); 
+          
+        }
+      } 
+      else {
+        noFill();
+      }
+
+      if (keyPressed) {
+        if (key == '2') {
+          n2 = true;
+          n1 = false;
+          n3 = false;
+          n4 = false;
+        }
+        if (n2 == true) {
+          println("Hello " + Name2);
+          println("Use the LEFT and RIGHT arrow keys to move");
+          fill(0);
+          textSize(50);
+          text(Name2, 0, 100);
+          fill(characterR1, characterG1, characterB1);
+          rect(x, 500, 50, 50); 
+        }
+      }
+      else{
+      noFill();
+      }
+
+      if (keyPressed) {
+        if (key == '3') {
+          n3 = true;
+          n1= false;
+          n2 = false;
+          n4 = false;
+        }
+        if (n3 == true) {
+          println("Hello " + Name3);
+          println("Use the Left and Right arrow keys to move");
+          fill(0);
+          textSize(50);
+          text(Name3, 0, 100);
+          fill(characterR2,characterG2, characterB2);
+          rect(x, 500, 50, 50); 
+        }
+      }
+      else{
+      noFill();
+      }
+
+      if (keyPressed) {
+        if (key == '4') {
+          n4 = true;
+          n1= false;
+          n2 = false;
+          n3 = false;
+        }
+        if (n4 == true) {
+          println("Hello " + Name4);
+          fill(0);
+          textSize(50);
+          text(Name4, 0, 100);
+          fill(characterR3, characterG3, characterB3);
+          rect(x, 500, 50, 50); 
+          println("Move with LEFT and RIGHT arrow keys to reach your obstacles");
+        }
+      }
+      else{
+      noFill();
+      } 
+      
+//////////////controls//////////////////////////////////////
+ noFill();
+rect(x, 500, 50, 50);      ///character/////
+
+  if (keyPressed) {
+    if (keyCode == LEFT) {
+      x1 = true;
+      x2 = false;
+      if (x1 == true) {
+        speed = -1;
+        println(x);
+      } 
+    }
+  }
+      else{
+        speed = 0;
+      println(x);
+      }
+      
+      if(keyPressed){
+      if(keyCode == RIGHT){
+        x1 = false;
+        x2 = true;
+        if(x2 == true){
+        speed = 1;
+        println(x);
+      }
+    }
+}
+      else {
+        speed = 0;
+        }  
+
+/////how to move/////////////
+  x = x + speed;
+     }
+     
+    /////////obstacles/////////////////////
+    firstObstacle();
+    
+     if (x>10 && x<148){
+       p1 = false;
+       i1 = false;
+       e1 = false;
+     }
+       
+    if(keyPressed){
+    if( x >149 && x <240 && key == 'p' || key == 'P'){
+    p1 = true;
+    i1 = false;
+    e1 = false;
+    }
+    if (p1 == true){
+      px = 450;
+      py = 280;
+   ix = -30;
+   ex = -30;
+   ///poison////
+   characterR = 182;
+   characterG = 253;
+   characterB = 21;
+   
+   characterR1 = 182;
+   characterG1 = 253;
+   characterB1 = 21;
+   
+   characterR2 = 182;
+   characterG2 = 253;
+   characterB2 = 21;
+   
+   characterR3 = 182;
+   characterG3 = 253;
+   characterB3 = 21;
+   
+   println("Hope you enjoyed your Apple Pie");    
+    ////////inventory////////
+    fill(255);
+    stroke(10);
+    strokeWeight(30);
+    rect( inventory, 214, 280, 150);
+    textSize(30);
+    fill(255);
+    inventoryName ="Inventory";
+    text(inventoryName, inventoryX, inventoryY);
+    noStroke();
+          }  
+          else{
+            ///back to regular color
+ //first character
+ characterR = 23;
+characterG = 40;
+characterB = 150;
+//second character 
+characterR1 = 150;
+characterG1 = 30;
+characterB1 = 60;
+//third character
+characterR2 = 20;
+characterG2 = 90;
+characterB2 = 180;
+//fourth character
+characterR3 = 60;
+characterG3 = 130;
+characterB3 = 90;
+        
+       }
+    }
+        
+    if(keyPressed){
+    if( x >149 && x <240 && key == 'i' || key == 'I'){
+    p1 = false;
+    i1 = true;
+    e1 = false;
+    }
+    if (i1 == true){
+      ix = 450;
+      iy = 280;
+   px = -30;
+   ex = -30;
+   println("Hope you enjoyed your Blueberry pie");    
+    ////////inventory////////
+    fill(255);
+    stroke(10);
+    strokeWeight(30);
+    rect( inventory, 214, 280, 150);
+    textSize(30);
+    fill(255);
+    inventoryName ="Inventory";
+    text(inventoryName, inventoryX, inventoryY);
+    noStroke();
+          }   
+        }
+    if(keyPressed){
+    if( x >149 && x <240 && key == 'e' || key == 'E'){
+    p1 = false;
+    i1 = false;
+    e1 = true;
+    }
+    if (e1 == true){
+      ex = 450;
+      ey = 280;
+   ix = -30;
+   px = -30;
+   println("Hope you enjoyed your PoisonBerry Pie");    
+    ////////inventory////////
+    fill(255);
+    stroke(10);
+    strokeWeight(30);
+    rect( inventory, 214, 280, 150);
+    textSize(30);
+    fill(255);
+    inventoryName ="Inventory";
+    text(inventoryName, inventoryX, inventoryY);
+    noStroke();
+          }   
+        }     
+       ////block to hide inventory!!!!////////
+       if(x> 245 && x < 305){
+       inventory = -300;
+       inventoryX = -300;                ///////make whatever choice is made from the first question, make it also disappear with the inventory!!!!! it'll be p1 or i1 or e1;
+       fill(0,0,255);
+       rect(blockerX,blockerY, 280,150);
+       
+       }
+       ///GAME OVER///
+if(x >348 && x <448 && characterR == 182){
+ gameover = true;
+}
+ if(gameover == true){
+ println("Your pie had traces of cyanide. Thanks for playing");
+ textSize(80);
+ fill(random(100),45, random(120));
+ text("GAME OVER",300,300);
+ x = -300;
+ }
+ if(x>348 && x <448){
+   fill(255,0,0);
+ rect(enemyX, 500, 50,50);
+ enemyX = enemyX -enemySpeed;
+ }
+   
+       
+ }  ///end
+//////////////Questions and Obstacles///////////////////////////////////////////  
+
+void firstQuestion() {
+  String s = "1)Hello, What time of day is it?";
+  println(s);
+  println("Morning = m");
+  println("Afternoon = a");
+  println("Night = n");
+}  //end
+
+
+void secondQuestion() {
+
+
+  Name1 = "Jim";
+  Name2 = "Mary";
+  Name3 = "Ashley";
+  Name4 = "Gary";
+
+  String s1 = "2)What is your name?";
+  println(s1);
+  println("1 = Jim");
+  println("2 = Mary");
+  println("3 = Ashley");
+  println("4 = Gary");
+  fill(255, 0, 0);
+}  //end 
+
+void firstObstacle(){
+
+
+////sky color changing/////////
+  if(x >150 && x <210){
+ r = random (30);
+ g  = random(150);
+ b = random(130);
+  fill(0);
+  textSize(40);
+ text("Which Pie Would You Like?", 0, 200);
+ fill(255,0,0);
+ text( "Apple?", 0, 240);
+ fill(0,0,255);
+ text("Blueberry?", 0, 270);
+ fill(169, 20, 150);
+  text("PosionBerry?", 0, 300);
+ println("P = Apple, I = Blueberry, E = PoisonBerry");
+ 
+//apple pie////
+fill(255, 0, 0);
+ ellipse (px, py, 50, 50);                       //////give the pies there own x variable. so when player choses a pie, the pie travels with them
+
+//blueberry pie/////
+ fill(14, 0, 190);
+ellipse (ix, iy, 50, 50);
+
+   ///posionberry////         
+ fill(169, 30, 90);
+ ellipse (ex, ey, 50, 50);
+  }
+  else{
+  r = 0;
+  g = 0;
+  b = 255;
+  }
+    
+  
+} //end

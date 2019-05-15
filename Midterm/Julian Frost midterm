@@ -1,0 +1,287 @@
+boolean pause =false;
+int score=0;
+void setup() {
+
+  size(500, 800);
+}
+
+// Variables to keep track of position and speed of ball
+float x = 250;
+float y = 200;
+float xspeed = 2.5;
+float yspeed = 2.5;
+
+float xballpo =0;
+float yballpo =0; 
+
+//hockey sticks
+float p1x = 250;
+float p1y = 700;
+int p1w= 100;
+
+//reflect line
+int len =width;
+int hei= 10;
+
+
+//pause
+float pausex;
+float pausey;
+
+
+//controls
+float value=0;
+// Called every re-draw, defaul 30 times per second
+void draw() {
+  frameRate(60);
+  // Clear screen to black
+  background(0);
+  //rect(0,700,700,hei);
+  //fill(65);
+  rect(p1x, p1y, p1w, 10);
+  stroke(204, 102, 0);
+  strokeWeight(10);
+//drawn goal
+  rect(150, -50, 200, 100);
+  noStroke();
+  // Set fill color to white
+  fill(255);
+  //stroke(1);
+  // Draw a circle at position x,y, 10 pixels large
+  ellipse(x, y, 10, 10);
+  // Update position by adding speed
+  x = x + xspeed;
+  y = y + yspeed;
+
+  //xballpo= x;
+  //print(xballpo);
+  if (y>height) { 
+    x=250;
+    y=200;
+    xspeed=0;
+    yspeed=0;
+  }
+  //yspeed = -yspeed;
+  else if (y<0) {
+    yspeed = -yspeed;
+  }
+  if (x>width || x<0) { 
+    xspeed = -xspeed;
+  }
+
+  if (y>p1y && y<p1y+10 && x>p1x && x<p1x+p1w) {
+    //ellipse(100, p1y, 10, 10);
+    yspeed = -yspeed;
+    print("hit");
+  }
+
+
+  if (p1x>width || p1x<0);
+  {
+    //print("end");
+  }
+
+  if (pause ==false) {
+    pausex=xspeed;
+    pausey=yspeed;
+  }
+
+  //print(xspeed);
+  println(pause);
+
+
+//goal
+ if(x>150&&x<200&&y<50);
+  {
+  fill(255); 
+  textSize(10);
+  textAlign(490, 10);
+  text(score,40,10);
+  score=score+1;
+print(y);  
+}
+
+
+
+
+}
+
+
+
+void keyPressed()
+{
+  if (keyCode==LEFT)
+  {
+    rect(p1x, p1y, 100, 10);
+    p1x = p1x-15;
+    fill(255);//delay(500);
+    //print("pressedL");
+  } if (keyCode==RIGHT)
+  {
+    rect(p1x, p1y, 100, 10);
+    p1x = p1x+15;
+    fill(255);//delay(500);
+    //print("pressedR");
+  }
+
+  if (keyCode=='M'&& xspeed==0&&yspeed==0)
+  {
+    xspeed= 2.5;
+    yspeed= 2.5;
+  }
+
+
+  //if (key==DOWN);
+  //{
+  //  pause= !pause;
+  //  print("p");
+
+  //  if (pause ==false) {
+  //    delay(0);
+  //    xspeed=pausex;
+  //    yspeed=pausey;
+  //  }
+
+  //  if (pause==true) {
+  //    xspeed=0;
+  //    yspeed=0;
+  //  }
+
+  //}
+  rect(p1x, p1y, p1w, 10);
+  
+ 
+  
+}
+  
+  
+
+//rect(150, -50, 200, 100);
+
+
+  //}
+  //  if(!pause)
+  //  {
+  //    noLoop();
+  //    print("paused");
+  //  }
+  //    else {
+  //      loop();
+  //}
+
+  //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //if (y<p1y){
+
+  // if (y<p1y && y>p1y+10 && x<p1x && x>p1x+p1w)
+  // {
+
+  //   //ellipse(100, p1y, 10, 10);
+  //  yspeed = -yspeed;
+  //  print("hit");
+  //}
+
+  //  }
+
+
+
+
+
+
+
+
+  //else
+  //{
+  //  background(0);
+  //}
+
+
+  //public void keyPressed()
+  //{
+  //  if(keyCode=='P')
+  //  {
+  //    !pause=pause;
+  //    if(pause){
+  //      noLoop(); }
+  //      else {
+  //        loop();
+  //  }
+
+  //  }    
+
+  //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //http://programmingjustforfun.blogspot.com/search?updated-max=2015-11-30T10:55:00-08:00&max-results=3&start=3&by-date=false

@@ -1,0 +1,323 @@
+//Alejandro Colmenares
+
+int imageIndex = 0;
+PFont f;
+int x = 50;
+int y = 50;
+int w = 100;
+int h = 75;
+
+int sState = 0;
+boolean Golem = false;
+boolean Treasure = false;
+boolean Story = false;
+
+
+
+PImage[] images = new PImage[11];
+
+void setup() {
+  size(600, 500);
+
+  for (int i = 0; i < images.length; i ++ ) {
+    images[i] = loadImage(i + ".jpg" );
+    f = createFont ("Times New Roman", 10);
+  }
+}
+
+void draw() {
+
+  if (sState == 0) {
+    scene0();
+    delay(100);
+  } else if (sState == 1) {
+    scene1();
+    delay(100);
+  } else if (sState == 2) {
+    scene2();
+    delay(100);
+  } else if (sState == 3) {
+    scene3();
+    delay(100);
+  } else if (sState == 4) {
+    scene4();
+    delay(100);
+  } else if (sState == 5) {
+    scene5();
+    delay(100);
+  } else if (sState == 6) {
+    scene6();
+    delay(100);
+  } else if (sState == 7) {
+    scene7();
+    delay(100);
+  } else if (sState == 8) {
+    scene8();
+    delay(100);
+  } else if (sState == 9) {
+    scene9();
+    delay(100);
+  } else if (sState == 10) {
+    scene10();
+    delay(100);
+  } else if (sState == 11) {
+    scene11();
+    delay(100);
+  }
+
+  fill(175, 75);
+  noStroke();
+  rect(x, y, w, h);
+
+  fill(200, 30);
+  noStroke();
+  rect(x, y+350, w, h);
+
+  fill(250, 30);
+  noStroke();
+  rect(x+400, y+350, w, h);
+
+  println(sState);
+  println(Golem);
+  println(Story);
+  println(Treasure);
+}
+
+void scene0() {
+
+  image(images[0], 0, 0, width, height);
+
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("Welcome, the journey ahead is dangerous but assured. You are in this meadow with three passages, leading North, East, and South, choose wisely.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 0) {
+    sState = 1;
+  }
+
+  if (mouseX > x && mouseX < x+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 0) {
+    sState = 2;
+  }
+
+  if (mouseX > x+400 && mouseX < (x+400)+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 0) {
+    sState = 3;
+  }
+}
+
+void scene1() {
+
+  image(images[1], 0, 0, width, height);
+
+  textFont(f, 15);
+  fill(0, 150, 150);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("You head north towards the volcano and see the area ablaze. It looks as if it has not been burning for too long. You feel the heat all around you.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 1) {
+    sState = 4;
+  }
+
+  if (mouseX > x && mouseX < x+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 1) {
+    sState = 0;
+  }
+}
+
+void scene2() {
+
+  image(images[2], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("You head south into the ravine and find the remains of an ancient war long before your time.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 2) {
+    sState = 5;
+  }
+
+  if (mouseX > x && mouseX < x+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 2) {
+    sState = 0;
+  }
+}
+
+void scene3() {
+
+  image(images[3], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("You head west and find yourself at the base of a mountain. The path is longer and winding along the side of ever infinite look of the mountaintop.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 3) {
+    sState = 6;
+  }
+
+  if (mouseX > x && mouseX < x+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 3) {
+    sState = 0;
+  }
+}
+
+void scene5() {
+
+  image(images[5], 0, 0, width, height);
+  textFont(f, 15);
+  fill(200, 200, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("You venture further and see the entrance to a cave. Inside you see a chest and wonder how long it has been there.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed) {
+    sState = 2;
+  }
+
+  if (mouseX > x+400 && mouseX < (x+400)+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 5) {
+    sState = 7;
+    Treasure = true;
+  }
+}
+void scene6() {
+
+  image(images[6], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("Traveling for what seems like forever you are faced, with the massive giant you heard of from this mountain. He invites you to listen to a story he has for you, in fear you stay to listen.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 6) {
+    sState = 6;
+  }
+
+  if (mouseX > x+400 && mouseX < (x+400)+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 6) {
+    sState = 7;
+    Story = true;
+  }
+}
+
+
+void scene8() {
+
+  image(images[8], 0, 0, width, height);
+  textFont(f, 15);
+  fill(240, 160, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("In a twist of events, you come to realize that the creature was one of many of the kingdoms protectors and mascots. For killing one, they have decided to label you a villian and murder you for the slaughter.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed) {
+    sState = 0;
+    Golem = false;
+    Story = false;
+    Treasure = false;
+  }
+}
+void scene9() {
+
+  image(images[9], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 255, 255);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("You calm your nerves and in doing so have made yourself one of the wealthy people of the land. You spend some days in the tavern eating and drinking.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed) {
+    sState = 0;
+    Story = false;
+    Golem = false;
+    Treasure = false;
+  }
+}  
+
+void scene10() {
+
+  image(images[10], 0, 0, width, height);
+  textFont(f, 15);
+  fill(200, 0, 200);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("Being the rightful heir to the throne, bringing the knowledge to the townsfolk has stirred unrest. you find yourself in a revolt, and in the end sitting on the mantle of one of the  greatest kingdoms of the lands.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed) {
+    sState = 0;
+    Treasure = false;
+    Story = false;
+    Golem = false;
+  }
+}
+
+
+
+void scene4() {
+
+  image(images[4], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("Walking further you stand face to face with a creature from this barren land. Escape from this battle is impossible.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 4) {
+    sState = 11;
+  }
+}
+
+void scene11() {
+
+  image(images[4], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 255, 255);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("All your attacks seem to hurt it, but it remains its compose.", width/10, height/2, 200, 200);
+
+ if (mouseX > x+400 && mouseX < (x+400)+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 11) {
+    sState = 7;
+    Golem = true;
+  }
+}
+
+
+
+
+void scene7() {
+
+  image(images[7], 0, 0, width, height);
+  textFont(f, 15);
+  fill(255, 0, 0);
+  textSize(15);
+  textAlign(LEFT, TOP);
+  text("The journey so far was long and dangerous, but you have reached a near ending. The castle in the distance is a haven from what you have been through so far. Choose wisely the news you wish to share with here.", width/10, height/2, 200, 200);
+
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h && mousePressed && sState == 7 && Golem == true) {
+    sState = 8;
+  }
+
+  if (mouseX > x && mouseX < x+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 7 && Treasure == true) {
+    sState = 9;
+  }
+
+  if (mouseX > x+400 && mouseX < (x+400)+w && mouseY > y+350 && mouseY < (y+350)+h && mousePressed && sState == 7 && Story == true) {
+    sState = 10;
+  }
+
+  if (Golem == true) {
+    fill(0, 255, 230);
+    textAlign(RIGHT, BOTTOM);
+    text("Fighting the creature was no easy task but you somehow manage to do so.", width/2, height/2, 200, 200);
+  }
+
+  if (Story == true) {
+    fill(0, 255, 230);
+    textAlign(RIGHT, BOTTOM);
+    text("Hearing the Giant's story has aged you quite a bit, but it was as if it was only a few hours pass. You have learned a lot, one thing being: you are the lost heir to the kingdom you are currently traveling towards.", width/2, height/2, 200, 200);
+  }
+  if (Treasure == true) {
+    fill(0, 255, 230);
+    textAlign(RIGHT, BOTTOM);
+    text("Collecting the spoils from the chest, you grow equal parts anxious and excited. With the amount of gold and precious stones in the ancient chest, a person could rest their entire lives.", width/2, height/2, 200, 200);
+  }
+}

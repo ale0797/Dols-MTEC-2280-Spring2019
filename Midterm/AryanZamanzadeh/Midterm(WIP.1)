@@ -1,0 +1,194 @@
+//Aryan Zamanzadeh
+
+//GAME VARIABLES
+boolean paused = false;
+boolean play = false;
+boolean restart = false;
+boolean GameOver = false;
+boolean ScoreBegins = false;
+int PaddlePoints = 0;
+int LevelPoints = 0;
+
+//RESTART BUTTON
+int xRestart = 150;
+int yRestart = 275;
+int wRestart = 300;
+int hRestart = 50;
+
+//PADDLE VARIABLES
+float xPaddle = 560;
+float yPaddle = 175;
+float wPaddle = 20;
+float hPaddle = 100;
+
+//BALL VARIABLES
+float xBall = 5 ;
+float yBall = 100;
+float xSpeed = 5;
+float ySpeed = 0;
+
+//ASTROID VARIABLES
+float xAstroid1 = 300;
+float yAstroid1 = 455;
+float wAstroid1 = random(20,30);
+float hAstroid1 = random(40,50);
+
+float xAstroid2 = 200;
+float yAstroid2 = 800;
+float wAstroid2 = random(10,30);
+float hAstroid2 = random(30,40);
+
+float AstroidSpeed1 = 3;
+float AstroidSpeed2 = 1;
+float AstroidResetNorth = 500;
+float AstroidResetSouth = -100;
+
+void setup(){
+size(600, 450);
+frameRate(60);
+}
+
+void draw(){
+background (0);
+
+InitialSequence();
+if(ScoreBegins == true){
+  score();
+  astroids();
+   if(GameOver == true){
+   GameOver();
+  } 
+}
+}
+void InitialSequence(){
+//BALL
+  noStroke();
+  fill(255, 210, 0);
+  ellipse(xBall, yBall, 20, 20);
+  
+//PADDLE
+  fill(195, 0, 255);
+  rect(xPaddle, yPaddle, wPaddle, hPaddle);
+  
+//BALL MOVEMENT
+  xBall = xBall + xSpeed;
+  yBall = yBall + ySpeed;
+  
+//PADDLE MOVEMENT
+  if(keyPressed == true && key == 's'){
+     yPaddle = yPaddle + 5; }
+  
+  if(keyPressed == true && key == 'w'){
+     yPaddle = yPaddle - 5; }
+  
+  if(yPaddle < 0) {
+     yPaddle = yPaddle +10; }
+   
+  if(yPaddle+hPaddle > height){  
+     yPaddle = yPaddle -10; }  
+    
+//PADDLE DYNAMICS
+   if(xBall > xPaddle && yBall > yPaddle && yBall <= yPaddle+25) {
+      xSpeed = -5; 
+      ySpeed = -5;
+     
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true;
+  } 
+   if(xBall > xPaddle && yBall > yPaddle+25 && yBall <= yPaddle+75) {
+      xSpeed = xSpeed * -1;
+      
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true;
+   }
+   if(xBall > xPaddle && yBall > yPaddle+75 && yBall < yPaddle+hPaddle) {
+      xSpeed = -5;
+      ySpeed = +5;
+      
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true; 
+  } 
+  
+//WALL DYNAMICS
+   if(xBall == width) {
+      xSpeed = xSpeed * -1; 
+    }
+      
+   if(xBall == 0 ) {
+      xSpeed = xSpeed * -1;
+    }
+      
+   if(yBall == 0 || yBall == height) {
+      ySpeed = ySpeed * -1; 
+    }
+}
+
+void score(){
+  fill(0, 255, 70);
+  textSize(20);
+  text(PaddlePoints, 10, 30);
+}
+
+void astroids(){
+//ASTROIDS
+  fill(0, 90, 255);
+  rect(xAstroid1, yAstroid1, wAstroid1, hAstroid1);
+  fill(0, 90, 255);
+  rect(xAstroid2, yAstroid2, wAstroid2, hAstroid2);
+
+//INITIAL ASTROID MOVEMENT
+  yAstroid1 -= AstroidSpeed1;
+   yAstroid2 -= AstroidSpeed2;
+   
+//ASTROID DYNAMICS/CONDITIONS
+  if(yAstroid1+hAstroid1 < 0 && PaddlePoints > LevelPoints){
+    wAstroid1 = random(20,30);
+    hAstroid1 = random(40,50);
+    yAstroid1 = AstroidResetNorth;
+    yAstroid1 -= AstroidSpeed1;
+    AstroidSpeed1 = random(2,5);
+    LevelPoints = LevelPoints + 20;
+  }
+  
+  if(yAstroid2+hAstroid2 < 0 && PaddlePoints > LevelPoints ){
+    yAstroid2 = AstroidResetNorth;
+    yAstroid2 -= AstroidSpeed2;
+    AstroidSpeed2 = random(3,5);
+    
+    wAstroid2 = random(10,30);
+    hAstroid2 = random(30,40);
+    
+    LevelPoints = LevelPoints + 20;
+    }
+    
+   if(xBall > xAstroid1 && xBall < xAstroid1+wAstroid1 &&
+      yBall > yAstroid1 && yBall < xAstroid1+hAstroid1 || 
+      xBall > xAstroid2 && xBall < xAstroid2+wAstroid2 &&
+      yBall > yAstroid2 && yBall < xAstroid2+hAstroid2){
+      GameOver = true;
+      }
+}
+
+void GameOver(){
+
+      background(0);
+      textSize(50);
+      fill(0, 255, 70);
+      text("GAME OVER", 150, 275);
+         
+}
+
+
+public void keyPressed(){
+  if ( key == 'p' ) {
+    paused = !paused;
+    if (paused) {
+      textSize(50);
+      fill(0, 255, 70);
+      text("PAUSED",220, 400);
+      noLoop();
+    } else {
+      loop();
+    }
+  }
+}

@@ -1,0 +1,365 @@
+Ring Ring1;
+Ring Ring2;
+Ring Ring3;
+Ring Ring4;
+UpperRing TopBranch1;
+UpperRing TopBranch2;
+UpperRing TopBranch3;
+UpperRing TopBranch4;
+LowerRing BottomBranch1;
+LowerRing BottomBranch2;
+LowerRing BottomBranch3;
+LowerRing BottomBranch4;
+
+PImage theater1;
+PImage theater2;
+PImage social1;
+PImage social2;
+PImage ballet1;
+PImage ballet2;
+PImage modern1;
+PImage modern2;
+PImage contemporary1;
+PImage contemporary2;
+PImage folkloric1;
+PImage folkloric2;
+PImage spiritual1;
+PImage spiritual2;
+PImage ballroom;
+PImage nightclub;
+
+PFont index;
+PFont theater;
+PFont social;
+PFont ballet;
+PFont modern;
+PFont contemporary;
+PFont folkloric;
+PFont spiritual;
+PFont nightclub_ballroom;
+
+
+
+
+
+void setup() {
+  size(800, 800);
+  theater1= loadImage("Epidaurus.png");
+  theater2= loadImage("curtain.png");
+  social1=loadImage("The Dance.png");
+  social2 = loadImage ("tango.png");
+  ballet1=loadImage("Royal.png");
+  ballet2 =loadImage("donquixote.png");
+  modern1 = loadImage("Martha.png");
+  modern2 =loadImage("Ailey.png");
+  contemporary1 = loadImage("Pite.png");
+  contemporary2 = loadImage("neoclassical.png");
+  folkloric1 = loadImage("Flamengo.png");
+  folkloric2 = loadImage("Balos.png");
+  spiritual1 = loadImage("Bali.png");
+  spiritual2 = loadImage("Sufi.Darvish.png");
+  ballroom = loadImage("standard.png");
+  nightclub = loadImage ("Club.png");
+  Ring1 = new Ring(163, 122, 79, 400, 400, 100);
+  Ring2 = new Ring(163, 122, 79, 400, 400, 200);
+  Ring3 = new Ring(163, 122, 79, 400, 400, 300);
+  Ring4 = new Ring(114, 65, 12, 400, 400, 400);
+  TopBranch1 = new UpperRing (400, 350, 10);
+  TopBranch2 = new UpperRing (350, 311, 10);
+  TopBranch3 = new UpperRing (450, 311, 10);
+  TopBranch4 = new UpperRing (400, 250, 10);
+  BottomBranch1 = new LowerRing (400, 450, 10);
+  BottomBranch2 = new LowerRing (350, 489, 10);
+  BottomBranch3 = new LowerRing (450, 489, 10);
+  BottomBranch4 = new LowerRing (400, 550, 10);
+  
+  index = createFont("Ariel", 40);
+  theater = createFont("Ariel", 40);
+  social = createFont("Ariel", 40);
+  ballet = createFont("Ariel", 40);
+  modern = createFont("Ariel", 40); 
+  contemporary = createFont("Ariel", 40);
+  folkloric =createFont("Ariel", 40);
+  spiritual = createFont("Ariel", 40);
+  nightclub_ballroom = createFont("Ariel", 40);
+  
+}
+
+void draw() {
+  background(255); 
+ 
+  
+  
+  Ring1.display();
+  Ring2.display();
+  TopBranch1.display();
+  TopBranch1.Theater();
+  BottomBranch1.display();
+  BottomBranch1.Social();
+  Ring3.display();
+  TopBranch2.display();
+  TopBranch2.Ballet();
+  TopBranch3.display();
+  TopBranch3.Modern();
+  BottomBranch2.display();
+  BottomBranch2.Folkloric();
+  BottomBranch3.display();
+  BottomBranch3.Spiritual();
+  Ring4.display();
+  TopBranch4.display();
+  TopBranch4.Contemporary();
+  BottomBranch4.display();
+  BottomBranch4.Ballroom();
+  textFont(index, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      text("Click a bubble from the first ring", width/2,height/2);
+}
+
+class Ring {
+  color r; //color
+  color g;
+  color b;
+  float w; //width of circle
+  float l; //length of circle
+  float d; //diameter of ring
+
+  Ring(int IndyRed, int IndyGreen, int IndyBlue, float IndyWidth, float IndyLength, float IndyDiameter) {
+    r=IndyRed;
+    g=IndyGreen;
+    b=IndyBlue;
+    w=IndyWidth;
+    l=IndyLength;
+    d=IndyDiameter;
+  }
+
+
+  void display() {
+    stroke(r, g, b);
+    strokeWeight(10);
+    noFill();
+    ellipseMode(CENTER);
+    ellipse(w, l, d, d);
+  }
+  }
+  class UpperRing {
+
+
+  //Variables
+  float w; //width of circle
+  float l; //length of circle
+  float d; //diameter of ring
+  float distance;
+
+  //Constructor
+
+  UpperRing(float IndyWidth, float IndyLength, float IndyDiameter) {
+    w=IndyWidth;
+    l=IndyLength;
+    d=IndyDiameter;
+  }
+  //Functions
+
+  void display() {
+    stroke(255, 0, 0);
+    strokeWeight(10);
+    noFill();
+    ellipseMode(CENTER);
+    ellipse(w, l, d, d);
+
+
+    distance = dist(mouseX, mouseY, w, l);
+  }
+  void Theater() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(theater1, w-250, l-200, d+250, d+250);
+      image(theater2, w+250, l-200, d+250, d+250);
+      textFont(theater, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      text("Performed Dance", width/2,100);
+      textSize(20);
+      text("From ancient times dance have been presented in theaters.", width/2, 700);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 650);
+    } else {
+
+      imageMode(CENTER);
+      image(theater1, w, l, d, d);
+    }
+  }
+  void Ballet() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(ballet1, w-200, l-150, d+250, d+250);
+      image(ballet2, w+300, l-150, d+250, d+250);
+      textFont(ballet, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(30);
+      text("Ballet", width/2, 100);
+      textSize(20);
+      text("Ballet began as entertainment for the royals. It follows a narrative form.", width/2, 700);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 650);
+    } else {
+      imageMode(CENTER);
+      image(ballet1, w, l, d, d);
+      image(ballet2, w, l, d, d);
+    }
+  }
+
+  void Modern() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(modern1, w-300, l-150, d+250, d+250);
+      image(modern2, w+200, l-150, d+250, d+250);
+      textFont(modern, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(30);
+      text("Modern", width/2, 100);
+      textSize(20);
+      text("Modern was an opposing movement to ballet. It follows a more abstact form.", width/2, 700);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 650);
+    } else {
+      imageMode(CENTER);
+      image(modern1, w, l, d, d);
+      image(modern2, w, l, d, d);
+    }
+  } 
+  void Contemporary() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(contemporary1, w-250, l-100, d+250, d+250);
+      image(contemporary2, w+250, l-100, d+250, d+250);
+      textFont(contemporary, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(30);
+      text("Contemporary", width/2, 100);
+      textSize(20);
+      text("Contemporary is a mixture of previous performing arts.", width/2, 700);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 650);
+    } else {
+      imageMode(CENTER);
+      image(contemporary1, w, l, d, d);
+      image(contemporary2, w, l, d, d);
+    }
+  }
+}
+class LowerRing {
+
+
+  //Variables
+  float w; //width of circle
+  float l; //length of circle
+  float d; //diameter of ring
+  float distance;
+
+  //Constructor
+  LowerRing(float IndyWidth, float IndyLength, float IndyDiameter) {
+    w=IndyWidth;
+    l=IndyLength;
+    d=IndyDiameter;
+  }
+  //Functions
+  void display() {
+    stroke(0);
+    strokeWeight(10);
+    noFill();
+    ellipseMode(CENTER);
+    ellipse(w, l, d, d);
+
+    distance = dist(mouseX, mouseY, w, l);
+
+    //println(distance);
+  }
+
+  void Social() {
+
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(social1, w-250, l+200, d+250, d+250);
+      image(social2, w+250, l+200, d+250, d+250);
+      textFont(social, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      text("Social Dance", width/2, 700);
+      textSize(20);
+      text("People dance socially for spirituality, mating, education etc.", width/2, 100);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 150);
+    } else {
+      imageMode(CENTER);
+      image(social1, w, l, d, d);
+      image(social2, w, l, d, d);
+    }
+  }
+  void Folkloric() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(folkloric1, w-200, l+150, d+250, d+250);
+      image(folkloric2, w+300, l+150, d+250, d+250);
+      textFont(folkloric, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      text("Folkloric", width/2, 700);
+      textSize(20);
+      text("Folkloric dance carries tradition from different places.", width/2, 100);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 150);
+    } else {
+      imageMode(CENTER);
+      image(folkloric1, w, l, d, d);
+      image(folkloric2, w, l, d, d);
+    }
+  }
+  void Spiritual() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(spiritual1, w-300, l+150, d+250, d+250);
+      image(spiritual2, w+200, l+150, d+250, d+250);
+      textFont(social, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(25);
+      text("Spiritual", width/2, 700);
+      textSize(20);
+      text("Spiritual dance achieves different states of minds and communicates beliefs", width/2, 100);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 150);
+    } else {
+      imageMode(CENTER);
+      image(spiritual1, w, l, d, d);
+      image(spiritual2, w, l, d, d);
+    }
+  }
+  void Ballroom() {
+    if (d>=distance && mousePressed) {
+      imageMode(CENTER);
+      image(ballroom, w-250, l+100, d+250, d+250);
+      image(nightclub, w+250, l+100, d+250, d+250);
+       textFont(nightclub_ballroom, 16);
+      fill(0); 
+      textAlign(CENTER, CENTER);
+      textSize(20);
+      text("Competition vs Nightclub", width/2, 700);
+      textSize(18);
+      text("Competitive dancing and night club dancing are two current ways social dance is expressed.", width/2, 100);
+      textSize(15);
+      text("Pick one bubble from the inner ring out of this dance geneology trunk.", width/2, 150);
+    } else {
+      imageMode(CENTER);
+      image(ballroom, w, l, d, d);
+      image(nightclub, w, l, d, d);
+    }
+  }
+}

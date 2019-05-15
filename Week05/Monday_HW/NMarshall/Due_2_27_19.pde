@@ -1,6 +1,8 @@
 
 //Naomi Marshall
 //Another Variation of a Previous Piece
+//Move to center of piece to get design to change color
+//You can also still press the mouse to have it twirl around
 //Incoporated switch
 
 float r = 0;

@@ -1,0 +1,128 @@
+//Aryan Zamanzadeh
+
+boolean paused = false;
+boolean ScoreBegins = false;
+int PaddlePoints = 0;
+int WallPoints = 0;
+
+//PADDLE VARIABLES
+float xPaddle = 560;
+float yPaddle = 175;
+float wPaddle = 20;
+float hPaddle = 100;
+
+//BALL VARIABLES
+float xBall = 5 ;
+float yBall = 100;
+float xSpeed = 5;
+float ySpeed = 0;
+
+//ASTROID VARIABLES
+float xAstroid1 = 300;
+float yAstroid1 = 455;
+float hAstroid1 = 30;
+float wAstroid1 = 70;
+
+float AstroidSpeed = 5;
+//float AstroidS
+
+void setup(){
+size(600, 450);
+frameRate(60);
+}
+
+void draw(){
+background (0);
+
+if(ScoreBegins == true){
+  score();
+  astroids();
+}
+
+  
+//BALL
+  noStroke();
+  fill(255, 210, 0);
+  ellipse(xBall, yBall, 20, 20);
+  
+//PADDLE
+  fill(195, 0, 255);
+  rect(xPaddle, yPaddle, wPaddle, hPaddle);
+  
+//BALL MOVEMENT
+  xBall = xBall + xSpeed;
+  yBall = yBall + ySpeed;
+  
+//PADDLE MOVEMENT
+  if(keyPressed == true && key == 's'){
+     yPaddle = yPaddle + 5; }
+  
+  if(keyPressed == true && key == 'w'){
+     yPaddle = yPaddle - 5; }
+  
+  if(yPaddle < 0) {
+     yPaddle = yPaddle +10; }
+   
+  if(yPaddle+hPaddle > height){  
+     yPaddle = yPaddle -10; }  
+    
+//PADDLE DYNAMICS
+   if(xBall > xPaddle && yBall > yPaddle && yBall <= yPaddle+25) {
+      xSpeed = -5; 
+      ySpeed = -5;
+     
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true;
+  } 
+   if(xBall > xPaddle && yBall > yPaddle+25 && yBall <= yPaddle+75) {
+      xSpeed = xSpeed * -1;
+      
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true;
+   }
+   if(xBall > xPaddle && yBall > yPaddle+75 && yBall < yPaddle+hPaddle) {
+      xSpeed = -5;
+      ySpeed = +5;
+      
+      PaddlePoints = PaddlePoints + 20;
+      ScoreBegins = true;
+  } 
+  
+//WALL DYNAMICS
+   if(xBall == width) {
+      xSpeed = xSpeed * -1; }
+      
+   if(xBall == 0 ) {
+      xSpeed = xSpeed * -1;
+   }
+      
+  if(yBall == 0 || yBall == height) {
+      ySpeed = ySpeed * -1; }
+}
+
+void score(){
+  fill(0, 255, 70);
+  textSize(20);
+  text(PaddlePoints+WallPoints, 10, 30);
+}
+
+void astroids(){
+  fill(0, 90, 255);
+  rect(xAstroid1, yAstroid1, wAstroid1, hAstroid1);
+  yAstroid1 -= AstroidSpeed;{  
+    
+  }
+}
+
+public void keyPressed(){
+  if ( key == 'p' ) {
+    paused = !paused;
+    if (paused) {
+      textSize(50);
+      text("PAUSED",220, 400);
+      noLoop();
+    } else {
+      loop();
+    }
+  }
+}
