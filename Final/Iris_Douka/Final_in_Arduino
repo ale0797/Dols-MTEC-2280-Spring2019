@@ -1,0 +1,46 @@
+int sensorPin0 = A0;
+int ledPin0 = 13;
+int ledPin1 = 12;
+int ledPin2 = 11;
+int ledPin3 = 10;
+int sensorValue0 = 0;
+
+void setup() {
+
+  pinMode(ledPin0, OUTPUT);
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  sensorValue0 = analogRead(A0);
+
+  if (sensorValue0 > 400) {
+
+    analogWrite(13, 255);
+  } if (sensorValue0 > 450) {
+
+    analogWrite(12, 255);
+  } if (sensorValue0 > 500) {
+
+    analogWrite(11, 255);
+  } if (sensorValue0 > 550) {
+
+    analogWrite(10, 255);
+ } 
+if(sensorValue0 < 200) {
+   analogWrite(10, 0);
+   analogWrite(11, 0);
+   analogWrite(12, 0);
+    analogWrite(13, 0);
+
+    
+    }
+
+
+  Serial.println(sensorValue0);
+
+
+}

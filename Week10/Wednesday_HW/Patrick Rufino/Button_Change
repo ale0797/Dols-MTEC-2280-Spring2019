@@ -1,0 +1,65 @@
+int buttonPin = 2;
+int counter = 0;
+
+const int ledPinR =  10;    
+const int ledPinG =  11;    
+const int ledPinB =  12;    
+int buttonState;  
+      
+void setup() {
+  
+  //Lights
+  pinMode(ledPinR, OUTPUT);
+  pinMode(ledPinG, OUTPUT);
+  pinMode(ledPinB, OUTPUT);
+  
+  //Button
+  pinMode(buttonPin, INPUT);
+  
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  
+  buttonState = digitalRead(buttonPin);
+    
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    counter++;
+    delay(150);
+  } 
+
+  else if (counter == 0){
+    digitalWrite(ledPinR, LOW);
+    digitalWrite(ledPinG, LOW);
+    digitalWrite(ledPinB, LOW);
+  }
+
+   else if (counter == 1){
+    digitalWrite(ledPinR, HIGH);
+    digitalWrite(ledPinG, LOW);
+    digitalWrite(ledPinB, LOW);
+  }
+
+    else if (counter == 2){
+    digitalWrite(ledPinR, LOW);
+    digitalWrite(ledPinG, HIGH);
+    digitalWrite(ledPinB, LOW);
+  }
+
+    else if (counter == 3){
+    digitalWrite(ledPinR, LOW);
+    digitalWrite(ledPinG, LOW);
+    digitalWrite(ledPinB, HIGH);
+  }
+
+   else if (counter == 4){
+    digitalWrite(ledPinR, HIGH);
+    digitalWrite(ledPinG, LOW);
+    digitalWrite(ledPinB, HIGH);
+  }
+
+  else if(counter == 5){
+    counter = 0;
+  }
+}

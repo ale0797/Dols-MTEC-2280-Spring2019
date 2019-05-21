@@ -1,0 +1,61 @@
+int sensorPin = A0;
+int sensorValue = 0;
+int buttonState = 0; 
+int buttonPin = 2;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);
+
+  pinMode(2, INPUT);
+
+  //Speaker
+  pinMode(8, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+  sensorValue = analogRead(sensorPin);
+  Serial.println(sensorValue);
+  buttonState = digitalRead(buttonPin);
+
+  
+  if(sensorValue > 1000){ 
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  digitalWrite(12, HIGH);
+  }
+
+  else if(sensorValue > 900){ 
+  digitalWrite(10, HIGH);
+  digitalWrite(11, LOW);
+  digitalWrite(12, HIGH);
+  } 
+
+  else if(sensorValue > 700){
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+  digitalWrite(12, HIGH);
+  }
+
+  else if(sensorValue > 500){
+  digitalWrite(10, LOW);
+  digitalWrite(11, HIGH);
+  digitalWrite(12, LOW);
+  }
+
+  else if(sensorValue > 300){
+  digitalWrite(10, HIGH);
+  digitalWrite(11, LOW);
+  digitalWrite(12, LOW);
+  }
+
+  else if(sensorValue < 100){
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+  digitalWrite(12, LOW);
+  }
+}

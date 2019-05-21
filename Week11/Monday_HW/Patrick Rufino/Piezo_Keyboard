@@ -1,0 +1,42 @@
+int sensorPin = A0;
+int sensorValue = 0;
+int buttonState1; 
+int buttonState2; 
+
+void setup() {
+  // put your setup code here, to run once:
+  
+  Serial.begin(9600);
+
+  //Speaker
+  pinMode(9, OUTPUT);
+
+  //Buttons
+  pinMode(2, INPUT);
+  pinMode(3, INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+  buttonState1 = digitalRead(2);
+  buttonState2 = digitalRead(3);
+  
+  sensorValue = analogRead(sensorPin);
+
+  if (buttonState1 == HIGH){
+    tone(9, 500);
+  }
+
+  else if (buttonState2 == HIGH){
+    tone(9, 100);
+  }
+
+  else if (sensorValue == 1023){
+    tone(9, 350);
+  }
+  
+  else{
+    noTone(9);
+  }
+}
